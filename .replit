@@ -1,0 +1,18 @@
+run = "npm install && npm run dev:replit --workspace=@berean/web"
+entrypoint = "apps/web/src/app/page.tsx"
+hidden = [".turbo", "node_modules", ".next"]
+
+[nix]
+channel = "stable-24.05"
+
+[env]
+NEXT_TELEMETRY_DISABLED = "1"
+
+[[ports]]
+localPort = 3000
+externalPort = 80
+
+[deployment]
+build = ["sh", "-c", "npm install && npm run build --workspace=@berean/web"]
+run = ["sh", "-c", "npm run start:replit --workspace=@berean/web"]
+deploymentTarget = "autoscale"
